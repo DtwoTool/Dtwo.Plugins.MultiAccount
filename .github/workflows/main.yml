@@ -31,9 +31,6 @@ jobs:
     - name: Set VERSION variable from tag
       run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
 
-    - name: Show latest tag
-      run: echo "The latest tag is ${{ VERSION }}"
-
     - name: Build project
       run: dotnet build Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version=${VERSION}
 
