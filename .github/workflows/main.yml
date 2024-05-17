@@ -20,16 +20,20 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Dtwo.Plugins.MultiAccount.csproj
       
-    - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+    - name: Get latest tag
+      id: gettag
+      run: echo "VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_ENV
+
+    - name: Show latest tag
+      run: echo "The latest tag is ${{ env.VERSION }}"
 
     - name: Build project
-      run: dotnet build Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version=${VERSION}
+      run: dotnet build Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version=${env.VERSION}
 
     - name: Pack NuGet package
-      run: dotnet pack Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version=${VERSION} --no-build --output .
+      run: dotnet pack Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version=${env.VERSION} --no-build --output .
 
     - name: Publish to GitHub Packages
-      run: dotnet nuget push Dtwo.Plugins.MultiAccount.${VERSION}.nupkg --source "https://nuget.pkg.github.com/DtwoTool/index.json" --api-key ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push Dtwo.Plugins.MultiAccount.${env.VERSION}.nupkg --source "https://nuget.pkg.github.com/DtwoTool/index.json" --api-key ${{ secrets.GITHUB_TOKEN }}
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
