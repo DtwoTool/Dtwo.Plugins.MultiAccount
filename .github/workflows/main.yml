@@ -19,10 +19,14 @@ jobs:
 
     - name: Restore dependencies
       run: dotnet restore Dtwo.Plugins.MultiAccount.csproj
-      
+
+    - name: List tags
+      run: git tag
+    
     - name: Get latest tag
       id: gettag
-      run: echo "VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_ENV
+      run: |
+        echo "VERSION=$(git tag --sort=-creatordate | head -n 1)" >> $GITHUB_ENV
 
     - name: Show latest tag
       run: echo "The latest tag is ${{ env.VERSION }}"
