@@ -27,6 +27,6 @@ jobs:
       run: dotnet pack Dtwo.Plugins.MultiAccount.csproj --configuration Release /p:Version="0.0.1-alpha" --no-build --output .
 
     - name: Publish to GitHub Packages
-      run: dotnet nuget push Dtwo.Plugins.MultiAccount.0.0.1-alpha.nupkg --source "https://nuget.pkg.github.com/DtwoTool/index.json" --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push Dtwo.Plugins.MultiAccount.0.0.1-alpha.nupkg --source "https://nuget.pkg.github.com/DtwoTool/index.json" --api-key ${{ GITHUB_TOKEN }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
