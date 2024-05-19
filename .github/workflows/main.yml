@@ -17,6 +17,10 @@ jobs:
       with:
         dotnet-version: '8.0'
 
+    - name: Configure NuGet for GitHub Packages
+      run: |
+        dotnet nuget add source --username di-one --password ${{ secrets.NUGET_API_KEY }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/DtwoTool/index.json"
+
     - name: Restore dependencies
       run: dotnet restore Dtwo.Plugins.MultiAccount.csproj
 
