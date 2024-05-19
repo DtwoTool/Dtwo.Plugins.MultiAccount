@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Dtwo.Plugins.WorldPathfinding\Dtwo.Plugins.WorldPathfinding.csproj" />
+    <PackageReference Include="Dtwo.Plugins.WorldPathfinding" Version="0.0.1-alpha" />
   </ItemGroup>
 
   <ItemGroup>
