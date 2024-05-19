@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Dtwo.Plugins.WorldPathfinding\Dtwo.Plugins.WorldPathfinding.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="data\**\*">
       <Pack>true</Pack>
       <PackagePath>content\data\</PackagePath>
